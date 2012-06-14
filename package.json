@@ -3,7 +3,7 @@
   "title": "jQuery Numeric Input",
   "description": "Blocks all non numeric chars and helps with dot and comma input",
   "version": "0.1.0",
-  "homepage": "https://github.com/manuelvanrijn/jquery.numeric_input",
+  "homepage": "https://github.com/manuelvanrijn/jquery-numeric_input",
   "author": {
     "name": "Manuel van Rijn",
     "email": "manuel@manuelles.nl",
@@ -11,19 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/manuelvanrijn/jquery.numeric_input.git"
+    "url": "git://github.com/manuelvanrijn/jquery-numeric_input.git"
   },
   "bugs": {
-    "url": "https://github.com/manuelvanrijn/jquery.numeric_input/issues"
+    "url": "https://github.com/manuelvanrijn/jquery-numeric_input/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/manuelvanrijn/jquery.numeric_input/blob/master/LICENSE-MIT"
+      "url": "https://github.com/manuelvanrijn/jquery-numeric_input/blob/master/LICENSE-MIT"
     },
     {
       "type": "GPL",
-      "url": "https://github.com/manuelvanrijn/jquery.numeric_input/blob/master/LICENSE-GPL"
+      "url": "https://github.com/manuelvanrijn/jquery-numeric_input/blob/master/LICENSE-GPL"
     }
   ],
   "dependencies": {

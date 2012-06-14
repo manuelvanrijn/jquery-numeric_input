@@ -5,8 +5,8 @@ This plugins helps blocking input fields only to except numeric value's. Also it
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/manuelvanrijn/jquery.numeric_input/master/dist/jquery.numeric_input.min.js
-[max]: https://raw.github.com/manuelvanrijn/jquery.numeric_input/master/dist/jquery.numeric_input.js
+[min]: https://raw.github.com/manuelvanrijn/jquery-numeric_input/master/dist/jquery.numeric_input.min.js
+[max]: https://raw.github.com/manuelvanrijn/jquery-numeric_input/master/dist/jquery.numeric_input.js
 
 In your web page:
 
@@ -63,5 +63,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 _Also, please don't edit files in the "dist" subdirectory as they are generated via grunt. You'll find source code in the "src" subdirectory!_
 
 ## License
-Copyright (c) 2012 Manuel van Rijn  
+Copyright (c) 2012 Manuel van Rijn
 Licensed under the MIT, GPL licenses.
