@@ -11,17 +11,26 @@
     init: function() {
       // set instance variable
       var _instance = this;
-      
+
       _instance.options = $.extend({}, $.fn.numeric_input.defaults, _instance.options);
+
+      // bind the keypress event
       _instance.$elem.keypress(function( e ) {
         if( _instance.preventDefaultForKeyCode(e.which) === true) {
-          e.preventDefault();  
+          e.preventDefault();
         }
         var newValue = _instance.getNewValueForKeyCode( e.which, _instance.$elem.val() );
         if( newValue !== false) {
           _instance.$elem.val( newValue );
         }
       });
+
+      // initial parse values
+      if( _instance.options.initialParse === true ) {
+        var parsedValue = _instance.parseValue( _instance.$elem.val() );
+        _instance.$elem.val( parsedValue );
+      }
+
       return _instance;
     },
 
@@ -47,8 +56,19 @@
         }
       }
       return false;
-    }
+    },
 
+    parseValue: function( value ) {
+      var result = value;
+      if ( result.indexOf('.') !== -1 || result.indexOf(',') !== -1 ) {
+        result = result.replace( '.', this.options.decimal );
+        result = result.replace( ',', this.options.decimal );
+      }
+      if ( result.indexOf( this.options.decimal ) === 0 ) {
+        result = '0' + result;
+      }
+      return result;
+    }
   };
 
   $.fn.numeric_input = function ( options ) {
@@ -61,7 +81,8 @@
 
   $.fn.numeric_input.defaults = {
     decimal: ',',
-    leadingZeroCheck: true
+    leadingZeroCheck: true,
+    initialParse: true
   };
 
 }( jQuery, window, document ));
