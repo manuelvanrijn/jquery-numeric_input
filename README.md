@@ -11,7 +11,7 @@ Download the [production version][min] or the [development version][max].
 In your web page:
 
 ```html
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="libs/jquery/jquery.js"></script>
 <script src="dist/jquery.numeric_input.min.js"></script>
 <script>
 $(function() {
