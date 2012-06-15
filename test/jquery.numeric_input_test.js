@@ -34,7 +34,7 @@
 
     strictEqual($.fn.numeric_input.defaults.decimal, ",", "default value for decimal check");
     strictEqual($.fn.numeric_input.defaults.leadingZeroCheck, true, "default value for leadingZeroCheck check");
-    
+
     $.fn.numeric_input.defaults.decimal = "!!!";
     equal($.fn.numeric_input.defaults.decimal, "!!!", "can change the defaults globally");
     $.fn.numeric_input.defaults.decimal = ",";
@@ -46,7 +46,7 @@
 
   test('set instance', function() {
     this.target.numeric_input();
-    ok(this.target.data('numeric_input'), "should set the data property with the instance");    
+    ok(this.target.data('numeric_input'), "should set the data property with the instance");
   });
 
   module('NumericInput', {
@@ -108,6 +108,32 @@
 
     equal(input2.data('numeric_input').getNewValueForKeyCode(44, '12#34'), false, "should not append a second # when comma is pressed");
     equal(input2.data('numeric_input').getNewValueForKeyCode(46, '12#34'), false, "should not append a second # when dot is pressed");
+  });
+
+  test('should parse the initial value to match the decimal option', function() {
+    var input = $('#qunit-fixture #numeric_2').val('1.0').numeric_input();
+    equal(input.val(), '1,0', "should parsed the value to match the ',' decimal");
+
+    input = $('#qunit-fixture #numeric_3').val('1,0').numeric_input({
+      decimal: '#'
+    });
+    equal(input.val(), '1#0', "should parsed the value to match the '#' decimal");
+
+    input = $('#qunit-fixture #numeric_4').val('.25').numeric_input();
+    equal(input.val(), '0,25', "should parsed the value and append the 0");
+  });
+
+  test('should not parse the initial value of option skipInitialParse is false', function() {
+    var input = $('#qunit-fixture #numeric_5').val('1.0').numeric_input({
+      initialParse: false
+    });
+    equal(input.val(), '1.0', "should not parse the value to 1,0");
+
+    input = $('#qunit-fixture #numeric_6').val('.25').numeric_input({
+      initialParse: false
+    });
+    equal(input.val(), '.25', "should not parse the value to  0.25");
+
   });
 
 }(jQuery));

@@ -27,7 +27,8 @@ Here's a list with the available default options
 ```javascript
 {
     decimal: ',',           // char to append when dot or comma is pressed
-    leadingZeroCheck: true  // append a 0 when the first input is a comma or dot
+    leadingZeroCheck: true, // append a 0 when the first input is a comma or dot
+    initialParse: true      // parse the value on start to match the decimal option
 }
 ```
 
@@ -56,6 +57,18 @@ $("input.numeric_input").numeric_input({
   leadingZeroCheck: false
 });
 ```
+
+### Don't parse the value on start
+
+```javascript
+$("input.numeric_input").numeric_input({
+  initialParse: false
+});
+```
+
+## Changelog
+
+A detailed overview of can be found in the [CHANGELOG](https://github.com/manuelvanrijn/jquery-numeric_input/blob/master/CHANGELOG.md).
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
