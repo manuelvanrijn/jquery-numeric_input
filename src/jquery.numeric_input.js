@@ -25,6 +25,14 @@
         }
       });
 
+      if( _instance.options.parseOnBlur === true ) {
+        // bind the blur event to (re)parse value
+        _instance.$elem.blur(function( e ) {
+          var parsedValue = _instance.parseValue( _instance.$elem.val() );
+          _instance.$elem.val( parsedValue );
+        });
+      }
+
       // initial parse values
       if( _instance.options.initialParse === true ) {
         var parsedValue = _instance.parseValue( _instance.$elem.val() );
@@ -82,7 +90,8 @@
   $.fn.numeric_input.defaults = {
     decimal: ',',
     leadingZeroCheck: true,
-    initialParse: true
+    initialParse: true,
+    parseOnBlur: true
   };
 
 }( jQuery, window, document ));
