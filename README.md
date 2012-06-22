@@ -1,4 +1,6 @@
-# jQuery Numeric Input
+# jQuery Numeric Input [![Build Status](https://secure.travis-ci.org/manuelvanrijn/jquery-numeric_input.png?branch=master)][travis]
+
+[travis]: http://travis-ci.org/manuelvanrijn/jquery-numeric_input
 
 This plugins helps blocking input fields only to except numeric value's. Also it provides the function to transform the dot or comma input to a char you provide.
 
