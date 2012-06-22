@@ -28,7 +28,8 @@ Here's a list with the available default options
 {
     decimal: ',',           // char to append when dot or comma is pressed
     leadingZeroCheck: true, // append a 0 when the first input is a comma or dot
-    initialParse: true      // parse the value on start to match the decimal option
+    initialParse: true,     // parse the value on start to match the decimal option
+    parseOnBlur: true       // parse value when user lose focus on field
 }
 ```
 
@@ -63,6 +64,14 @@ $("input.numeric_input").numeric_input({
 ```javascript
 $("input.numeric_input").numeric_input({
   initialParse: false
+});
+```
+
+### Don't parse the value on blur
+
+```javascript
+$("input.numeric_input").numeric_input({
+  parseOnBlur: false
 });
 ```
 
