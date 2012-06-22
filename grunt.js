@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
         '<%= pkg.homepage ? " * " + pkg.homepage + "\n" : "" %>' +
         ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
-        ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' + 
+        ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' +
         ' */'
     },
     concat: {
@@ -59,4 +59,6 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', 'lint qunit concat min');
 
+  // Travis CI task.
+  grunt.registerTask('travis', 'lint qunit');
 };
