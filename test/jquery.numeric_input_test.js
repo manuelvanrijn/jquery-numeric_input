@@ -75,8 +75,10 @@
 
   test('block all input except numeric', function() {
     equal(this.numeric_input.preventDefaultForKeyCode( 44 ), true, 'block comma');
+    equal(this.numeric_input.preventDefaultForKeyCode( 188 ), true, 'block comma');
     equal(this.numeric_input.preventDefaultForKeyCode( 45 ), true, 'block minus');
     equal(this.numeric_input.preventDefaultForKeyCode( 46 ), true, 'block dot');
+    equal(this.numeric_input.preventDefaultForKeyCode( 190 ), true, 'block dot');
     equal(this.numeric_input.preventDefaultForKeyCode( 47 ), true, 'block slash');
 
     equal(this.numeric_input.preventDefaultForKeyCode( 48 ), false, 'do not block 0');
@@ -89,6 +91,17 @@
     equal(this.numeric_input.preventDefaultForKeyCode( 55 ), false, 'do not block 7');
     equal(this.numeric_input.preventDefaultForKeyCode( 56 ), false, 'do not block 8');
     equal(this.numeric_input.preventDefaultForKeyCode( 57 ), false, 'do not block 9');
+  });
+
+  test ('do not block special keys', function() {
+    equal(this.numeric_input.preventDefaultForKeyCode( 0 ), false, 'do not block browser specific key');
+    equal(this.numeric_input.preventDefaultForKeyCode( 8 ), false, 'do not block backspace');
+    equal(this.numeric_input.preventDefaultForKeyCode( 9 ), false, 'do not block tab');
+    equal(this.numeric_input.preventDefaultForKeyCode( 35 ), false, 'do not block end');
+    equal(this.numeric_input.preventDefaultForKeyCode( 36 ), false, 'do not block home');
+    equal(this.numeric_input.preventDefaultForKeyCode( 37 ), false, 'do not block left arrow');
+    equal(this.numeric_input.preventDefaultForKeyCode( 39 ), false, 'do not block rigth arrow');
+    equal(this.numeric_input.preventDefaultForKeyCode( 144 ), false, 'do not block num lock');
   });
 
   test('append leading zero', function() {

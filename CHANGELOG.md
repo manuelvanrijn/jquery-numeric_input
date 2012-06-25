@@ -1,3 +1,7 @@
+### TBA
+
+- [#6] Fixes problem with special key's not being triggered
+
 ### v0.1.2
 
 - [#3] Added onBlur support so autocompleted value's will also be parsed

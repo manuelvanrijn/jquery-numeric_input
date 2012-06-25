@@ -43,16 +43,29 @@
     },
 
     preventDefaultForKeyCode: function( keyCode ) {
-      // skip input if non numeric
-      if ( keyCode < 48 || keyCode > 57 || keyCode === 44 || keyCode === 46 ) {
-        return true;
+      // numeric
+      if( keyCode >= 48 && keyCode <= 57) {
+        return false;
       }
-      return false;
+      // special key's
+      switch ( keyCode ) {
+        case 0 :     // browser specific special key
+        case 8 :     // backspace
+        case 9 :     // tab
+        case 35 :    // end
+        case 36 :    // home
+        case 37 :    // left
+        case 39 :    // right
+        case 144 :   // num lock
+          return false;
+        default:
+          return true;
+      }
     },
 
     getNewValueForKeyCode: function( keyCode, currentValue ) {
       // if a comma or a dot is pressed...
-      if( keyCode === 44 || keyCode === 46 ) {
+      if( keyCode === 44 || keyCode === 46 || keyCode === 188 || keyCode === 190 ) {
         // and we do not have a options.decimal present...
         if( currentValue.indexOf( this.options.decimal ) === -1 ) {
           // append leading zero if currentValue is empty and leadingZeroCheck is active
