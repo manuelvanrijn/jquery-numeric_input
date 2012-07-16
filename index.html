@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>jQuery-numeric_input by manuelvanrijn</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>jQuery-numeric_input</h1>
+        <p>Blocks all non numeric chars and helps with dot and comma input</p>
+
+        <p class="view"><a href="https://github.com/manuelvanrijn/jquery-numeric_input">View the Project on GitHub <small>manuelvanrijn/jquery-numeric_input</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/manuelvanrijn/jquery-numeric_input/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/manuelvanrijn/jquery-numeric_input/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/manuelvanrijn/jquery-numeric_input">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>jQuery Numeric Input <a href="http://travis-ci.org/manuelvanrijn/jquery-numeric_input"><img src="https://secure.travis-ci.org/manuelvanrijn/jquery-numeric_input.png?branch=master" alt="Build Status"></a>
+</h1>
+
+<p>This plugins helps blocking input fields only to except numeric value's. Also it provides the function to transform the dot or comma input to a char you provide.</p>
+
+<h2>Getting Started</h2>
+
+<p>Download the <a href="https://raw.github.com/manuelvanrijn/jquery-numeric_input/master/dist/jquery.numeric_input.min.js">production version</a> or the <a href="https://raw.github.com/manuelvanrijn/jquery-numeric_input/master/dist/jquery.numeric_input.js">development version</a>.</p>
+
+<p>In your web page:</p>
+
+<div class="highlight">
+<pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/jquery/jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/jquery.numeric_input.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">"input.numeric_input"</span><span class="p">).</span><span class="nx">numeric_input</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre>
+</div>
+
+
+<h2>Default options</h2>
+
+<p>Here's a list with the available default options</p>
+
+<div class="highlight">
+<pre><span class="p">{</span>
+    <span class="nx">decimal</span><span class="o">:</span> <span class="s1">','</span><span class="p">,</span>           <span class="c1">// char to append when dot or comma is pressed</span>
+    <span class="nx">leadingZeroCheck</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// append a 0 when the first input is a comma or dot</span>
+    <span class="nx">initialParse</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// parse the value on start to match the decimal option</span>
+    <span class="nx">parseOnBlur</span><span class="o">:</span> <span class="kc">true</span>       <span class="c1">// parse value when user lose focus on field</span>
+<span class="p">}</span>
+</pre>
+</div>
+
+
+<p>You can override the defaults globally. For instance, you can override the global default value for <code>decimal</code> by defining:</p>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">numeric_input</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">decimal</span> <span class="o">=</span> <span class="s1">'.'</span><span class="p">;</span>
+</pre>
+</div>
+
+
+<h2>Examples</h2>
+
+<h3>Change the decimal char</h3>
+
+<div class="highlight">
+<pre><span class="c1">// set's the decimal to a '.' instead of a ','</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"input.numeric_input"</span><span class="p">).</span><span class="nx">numeric_input</span><span class="p">({</span>
+  <span class="nx">decimal</span><span class="o">:</span> <span class="s1">'.'</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<h3>Don't append a leading zero</h3>
+
+<div class="highlight">
+<pre><span class="c1">// set's the decimal to a '.' instead of a ','</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"input.numeric_input"</span><span class="p">).</span><span class="nx">numeric_input</span><span class="p">({</span>
+  <span class="nx">leadingZeroCheck</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<h3>Don't parse the value on start</h3>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">(</span><span class="s2">"input.numeric_input"</span><span class="p">).</span><span class="nx">numeric_input</span><span class="p">({</span>
+  <span class="nx">initialParse</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<h3>Don't parse the value on blur</h3>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">(</span><span class="s2">"input.numeric_input"</span><span class="p">).</span><span class="nx">numeric_input</span><span class="p">({</span>
+  <span class="nx">parseOnBlur</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<h2>Changelog</h2>
+
+<p>A detailed overview of can be found in the <a href="https://github.com/manuelvanrijn/jquery-numeric_input/blob/master/CHANGELOG.md">CHANGELOG</a>.</p>
+
+<h2>Contributing</h2>
+
+<p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using <a href="https://github.com/cowboy/grunt">grunt</a>.</p>
+
+<p><em>Also, please don't edit files in the "dist" subdirectory as they are generated via grunt. You'll find source code in the "src" subdirectory!</em></p>
+
+<h2>License</h2>
+
+<p>Copyright (c) 2012 Manuel van Rijn
+Licensed under the MIT, GPL licenses.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/manuelvanrijn">manuelvanrijn</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-17149124-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
