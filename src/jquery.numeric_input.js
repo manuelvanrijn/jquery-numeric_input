@@ -69,7 +69,7 @@
         // and we do not have a options.decimal present...
         if( currentValue.indexOf( this.options.decimal ) === -1 ) {
           // append leading zero if currentValue is empty and leadingZeroCheck is active
-          if( currentValue.trim() === '' && this.options.leadingZeroCheck ) {
+          if( $.trim(currentValue) === '' && this.options.leadingZeroCheck ) {
             currentValue = '0';
           }
           // append the options.decimal instead of the dot or comma

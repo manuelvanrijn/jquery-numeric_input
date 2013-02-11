@@ -1,7 +1,7 @@
 /*
- * jQuery Numeric Input - v0.1.2 - 2012-06-25
+ * jQuery Numeric Input - v0.1.2 - 2013-02-11
  * https://github.com/manuelvanrijn/jquery-numeric_input
- * Copyright (c) 2012 Manuel van Rijn
+ * Copyright (c) 2013 Manuel van Rijn
  * Licensed MIT, GPL
  */
 
@@ -76,7 +76,7 @@
         // and we do not have a options.decimal present...
         if( currentValue.indexOf( this.options.decimal ) === -1 ) {
           // append leading zero if currentValue is empty and leadingZeroCheck is active
-          if( currentValue.trim() === '' && this.options.leadingZeroCheck ) {
+          if( $.trim(currentValue) === '' && this.options.leadingZeroCheck ) {
             currentValue = '0';
           }
           // append the options.decimal instead of the dot or comma
