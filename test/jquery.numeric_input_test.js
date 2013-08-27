@@ -93,7 +93,7 @@
     equal(this.numeric_input.preventDefaultForKeyCode( 57 ), false, 'do not block 9');
   });
 
-  test ('do not block special keys', function() {
+  test('do not block special keys', function() {
     equal(this.numeric_input.preventDefaultForKeyCode( 0 ), false, 'do not block browser specific key');
     equal(this.numeric_input.preventDefaultForKeyCode( 8 ), false, 'do not block backspace');
     equal(this.numeric_input.preventDefaultForKeyCode( 9 ), false, 'do not block tab');
@@ -185,6 +185,20 @@
     equal(this.target.val(), '0,25', 'should parsed the value and append the 0');
   });
 
+  test('should parse the negative value', function() {
+    this.target.val('-2.0').numeric_input({
+      allowNegative: true
+    });
+    equal(this.target.val(), '-2,0', 'should parsed the value');
+  });
+
+  test('should parse the negative value without leading zero', function() {
+    this.target.val('-.3').numeric_input({
+      allowNegative: true
+    });
+    equal(this.target.val(), '-0,3', 'should parsed the value');
+  });
+
   module('Skip initial parse', {
     setup: function() {
       $('#qunit-fixture').append('<input type="text" id="numeric" />');
@@ -208,6 +222,68 @@
       initialParse: false
     });
     equal(this.target.val(), '.25', 'should not parse the value to  0.25');
+  });
+
+  module('Cleanup string', {
+    setup: function() {
+      $('#qunit-fixture').append('<input type="text" id="numeric" />');
+      this.target = $('#qunit-fixture #numeric');
+      this.numeric_input = this.target.numeric_input({
+        allowNegative: true
+      }).data('numeric_input');
+    },
+    teardown: function() {
+      $('#qunit-fixture').empty();
+      this.target = undefined;
+      this.numeric_input = undefined;
+    }
+  });
+
+  test('should strip unsupported chars', function() {
+    equal(this.numeric_input.parseValue("abcdefghijklmnopqrstuvwxyz"), '');
+    equal(this.numeric_input.parseValue("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), '');
+    equal(this.numeric_input.parseValue("a1b2c3D4E5F6Z"), '123456');
+    equal(this.numeric_input.parseValue("123456789.987654321,123456789"), '123456789,987654321,123456789');
+    equal(this.numeric_input.parseValue("-123,456"), '-123,456');
+  });
+
+  module('Allow negative values', {
+    setup: function() {
+      $('#qunit-fixture')
+        .append('<input type="text" id="numeric" />')
+        .append('<input type="text" id="numeric_2" />');
+      this.target = $('#qunit-fixture #numeric');
+      this.second_target = $('#qunit-fixture #numeric_2');
+      this.numeric_input = this.target.numeric_input({
+        allowNegative: true
+      }).data('numeric_input');
+    },
+    teardown: function() {
+      $('#qunit-fixture').empty();
+      this.target = undefined;
+      this.second_target = undefined;
+      this.numeric_input = undefined;
+    }
+  });
+
+  test('should prepend the minus char if allowed', function() {
+    equal(this.numeric_input.getNewValueForKeyCode(45, '2,0'), '-2,0', 'should prepand the minus');
+    equal(this.numeric_input.getNewValueForKeyCode(45, '-2,0'), false, 'should not prepand the minus if already prepended');
+    equal(this.numeric_input.getNewValueForKeyCode(45, ''), '-', 'should prepend the minus');
+  });
+
+  test('should not allow a negative value if allowNegative is false', function() {
+    this.second_target.val('-1.0').numeric_input({
+      allowNegative: false
+    });
+    equal(this.second_target.val(), '1,0', 'should parse the value to 1,0');
+  });
+
+  test('should not allow a negative value if allowNegative is false', function() {
+    this.second_target.val('-1.0').numeric_input({
+      allowNegative: true
+    });
+    equal(this.second_target.val(), '-1,0', 'should parse the value to 1,0');
   });
 
 }(jQuery));
