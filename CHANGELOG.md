@@ -1,7 +1,10 @@
 ### TBA
 
-- [#9] Fixes issue with trim for IE8
-- [#6] Fixes problem with special key's not being triggered
+### v0.1.3
+
+- [#10] Allow negative values with the option `allowNegative: true`
+- [ #9] Fixes issue with trim for IE8
+- [ #6] Fixes problem with special key's not being triggered
 
 ### v0.1.2
 

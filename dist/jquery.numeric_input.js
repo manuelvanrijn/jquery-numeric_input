@@ -1,5 +1,5 @@
 /*
- * jQuery Numeric Input - v0.1.2 - 2013-02-11
+ * jQuery Numeric Input - v0.1.3 - 2013-08-27
  * https://github.com/manuelvanrijn/jquery-numeric_input
  * Copyright (c) 2013 Manuel van Rijn
  * Licensed MIT, GPL
@@ -83,17 +83,32 @@
           return currentValue + this.options.decimal;
         }
       }
+      // prepend the minus
+      if( keyCode === 45 && this.options.allowNegative ) {
+        if( currentValue.charAt(0) !== '-' ) {
+          return '-' + currentValue;
+        }
+      }
       return false;
     },
 
     parseValue: function( value ) {
-      var result = value;
+      var minusWasStripped = false;
+      var result = value.replace(/[A-Za-z$]/g, '');
+      // strip minus and prepend later
+      if( result.indexOf('-') !== -1 ) {
+        result = result.replace( '-', '' );
+        minusWasStripped = true;
+      }
       if ( result.indexOf('.') !== -1 || result.indexOf(',') !== -1 ) {
         result = result.replace( '.', this.options.decimal );
         result = result.replace( ',', this.options.decimal );
       }
       if ( result.indexOf( this.options.decimal ) === 0 ) {
         result = '0' + result;
+      }
+      if ( minusWasStripped === true && this.options.allowNegative === true) {
+        result = '-' + result;
       }
       return result;
     }
@@ -111,7 +126,8 @@
     decimal: ',',
     leadingZeroCheck: true,
     initialParse: true,
-    parseOnBlur: true
+    parseOnBlur: true,
+    allowNegative: false
   };
 
 }( jQuery, window, document ));
