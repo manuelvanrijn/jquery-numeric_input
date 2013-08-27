@@ -45,6 +45,7 @@
                   <li><a href="#example3">Don't append a leading zero</a></li>
                   <li><a href="#example4">Don't parse the value on start</a></li>
                   <li><a href="#example5">Don't parse the value on blur</a></li>
+                  <li><a href="#example6">Allow negative value</a></li>
                 </ul>
               </li>
               <li><a href="https://github.com/manuelvanrijn/jquery-numeric_input/blob/master/CHANGELOG.md">Changelog</a>
@@ -110,7 +111,8 @@ $.fn.numeric_input.defaults = {
   decimal:          ',',    // char to append when dot or comma is pressed
   leadingZeroCheck: true,   // append a 0 when the first input is a comma or dot
   initialParse:     true,   // parse the value on start to match the decimal option
-  parseOnBlur:      true    // parse value when user lose focus on field
+  parseOnBlur:      true,   // parse value when user lose focus on field
+  allowNegative:    false   // allow value to be negative (prepends a minus char)
 };
 </pre>
           </div>
@@ -232,6 +234,29 @@ $("input.numeric_input").numeric_input({
 <pre class="prettyprint linenums content">
 $("input.numeric_input").numeric_input({
   parseOnBlur: false
+});
+</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXAMPLE 6
+      ================================================== -->
+      <section id="example6">
+        <div class="page-header">
+          <h2>Example 6:
+            <small>Allow negative value's</small>
+          </h2>
+        </div>
+        <div class="row">
+          <div class="span6" id="demo6">
+            <input type='text' value='-1.0' />
+          </div>
+          <div class="span6 panel">
+            <h5 class="header">Code</h5>
+<pre class="prettyprint linenums content">
+$("input.numeric_input").numeric_input({
+  allowNegative: true
 });
 </pre>
           </div>

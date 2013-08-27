@@ -17,4 +17,8 @@ $(function() {
   $('#demo5 input').numeric_input({
     parseOnBlur: false
   });
+
+  $('#demo6 input').numeric_input({
+    allowNegative: true
+  });
 });
