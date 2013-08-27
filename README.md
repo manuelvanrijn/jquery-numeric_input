@@ -31,7 +31,8 @@ Here's a list with the available default options
     decimal: ',',           // char to append when dot or comma is pressed
     leadingZeroCheck: true, // append a 0 when the first input is a comma or dot
     initialParse: true,     // parse the value on start to match the decimal option
-    parseOnBlur: true       // parse value when user lose focus on field
+    parseOnBlur: true,      // parse value when user lose focus on field
+    allowNegative: false    // allow value to be negative (prepends a minus char)
 }
 ```
 
@@ -77,6 +78,14 @@ $("input.numeric_input").numeric_input({
 });
 ```
 
+### Allow negative values
+
+```javascript
+$("input.numeric_input").numeric_input({
+  allowNegative: true
+});
+```
+
 ## Changelog
 
 A detailed overview of can be found in the [CHANGELOG](https://github.com/manuelvanrijn/jquery-numeric_input/blob/master/CHANGELOG.md).
@@ -87,7 +96,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 _Also, please don't edit files in the "dist" subdirectory as they are generated via grunt. You'll find source code in the "src" subdirectory!_
 
 ## License
-Copyright (c) 2012 Manuel van Rijn
+Copyright (c) 2013 Manuel van Rijn
 Licensed under the MIT, GPL licenses.
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/74b24b73a364e01a82ac840cacd77fb4 "githalytics.com")](http://githalytics.com/manuelvanrijn/jquery-numeric_input)
