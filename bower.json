@@ -1,0 +1,27 @@
+{
+  "name": "jquery-numeric_input",
+  "version": "0.1.3",
+  "homepage": "https://github.com/manuelvanrijn/jquery-numeric_input",
+  "authors": [
+    "Manuel van Rijn <manuel@manuelvanrijn.nl>"
+  ],
+  "description": "Blocks all non numeric chars and helps with dot and comma input",
+  "main": "dist/jquery.numeric_input.js",
+  "keywords": [
+    "jquery",
+    "numeric",
+    "parse",
+    "normalize"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.3.4",
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
