@@ -29,16 +29,23 @@
         var newValue = _instance.getNewValueForKeyCode( e.which, _instance.$elem.val() );
         if( newValue !== false) {
           _instance.$elem.val( newValue );
+          _instance.options.callback.call(_instance, newValue);
         }
       });
 
       if( _instance.options.parseOnBlur === true ) {
         // bind the blur event to (re)parse value
-        _instance.$elem.blur(function( e ) {
+        _instance.$elem.on('blur', function( e ) {
           var parsedValue = _instance.parseValue( _instance.$elem.val() );
           _instance.$elem.val( parsedValue );
         });
       }
+
+      // trigger callback on change
+      _instance.$elem.on('input propertychange', function(){
+        var parsedValue = _instance.parseValue( _instance.$elem.val() );
+        _instance.options.callback.call(_instance, parsedValue);
+      });
 
       // initial parse values
       if( _instance.options.initialParse === true ) {
@@ -110,6 +117,18 @@
       if ( minusWasStripped === true && this.options.allowNegative === true) {
         result = '-' + result;
       }
+      if ( this.options.numberOfDecimals !== null ) {
+        var decimals = result.split( this.options.decimal )[1];
+        if( decimals !== undefined ) {
+          if( decimals.length > this.options.numberOfDecimals ) {
+            result = Number(Number(String('0.' + decimals)).toFixed(this.options.numberOfDecimals)) + Math.floor(Number(result));
+          }
+          if( decimals.length < this.options.numberOfDecimals ) {
+            result += new Array( this.options.numberOfDecimals - decimals.length + 1 ).join('0');
+          }
+        }
+        result = String(Number(result).toFixed(this.options.numberOfDecimals));
+      }
       return result;
     }
   };
@@ -124,10 +143,12 @@
 
   $.fn.numeric_input.defaults = {
     decimal: ',',
+    numberOfDecimals: null,
     leadingZeroCheck: true,
     initialParse: true,
     parseOnBlur: true,
-    allowNegative: false
+    allowNegative: false,
+    callback: function() {}
   };
 
 }( jQuery, window, document ));
