@@ -1,5 +1,5 @@
 /*
- * jQuery Numeric Input - v0.1.3 - 2013-08-27
+ * jQuery Numeric Input - v0.1.4 - 2015-04-13
  * https://github.com/manuelvanrijn/jquery-numeric_input
  * Copyright (c) 2013 Manuel van Rijn
  * Licensed MIT, GPL
