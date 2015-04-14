@@ -95,6 +95,11 @@
     parseValue: function( value ) {
       var minusWasStripped = false;
       var result = value.replace(/[A-Za-z$]/g, '');
+
+      if(result.length === 0 && this.options.allowEmpty) {
+        return '';
+      }
+
       // strip minus and prepend later
       if( result.indexOf('-') !== -1 ) {
         result = result.replace( '-', '' );
@@ -141,6 +146,7 @@
     initialParse: true,
     parseOnBlur: true,
     allowNegative: false,
+    allowEmpty: false,
     callback: function() {}
   };
 
