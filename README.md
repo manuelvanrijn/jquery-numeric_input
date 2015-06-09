@@ -96,5 +96,3 @@ _Also, please don't edit files in the "dist" subdirectory as they are generated 
 ## License
 Copyright (c) 2013 Manuel van Rijn
 Licensed under the MIT, GPL licenses.
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/74b24b73a364e01a82ac840cacd77fb4 "githalytics.com")](http://githalytics.com/manuelvanrijn/jquery-numeric_input)
