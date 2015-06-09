@@ -2,7 +2,7 @@
   "name": "jquery.numeric_input",
   "title": "jQuery Numeric Input",
   "description": "Blocks all non numeric chars and helps with dot and comma input",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "https://github.com/manuelvanrijn/jquery-numeric_input",
   "author": {
     "name": "Manuel van Rijn",

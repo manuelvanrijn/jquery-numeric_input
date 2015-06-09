@@ -1,7 +1,7 @@
 /*
- * jQuery Numeric Input - v0.1.4 - 2015-04-13
+ * jQuery Numeric Input - v0.1.5 - 2015-06-09
  * https://github.com/manuelvanrijn/jquery-numeric_input
- * Copyright (c) 2013 Manuel van Rijn
+ * Copyright (c) 2015 Manuel van Rijn
  * Licensed MIT, GPL
  */
 
@@ -38,6 +38,20 @@
         _instance.$elem.on('blur', function( e ) {
           var parsedValue = _instance.parseValue( _instance.$elem.val() );
           _instance.$elem.val( parsedValue );
+        });
+      }
+
+      if( _instance.options.clearInputOnBlurForZeroValue === true ) {
+        _instance.$elem.on('focus', function( e ) {
+          var result = _instance.$elem.val();
+
+          result = result.replace(/[A-Za-z$]/g, '');
+          result = result.replace( '-', '' );
+          result = result.replace( _instance.options.decimal, '.' );
+
+          if( parseFloat(result) === 0 ) {
+            _instance.$elem.val( '' );
+          }
         });
       }
 
@@ -102,6 +116,11 @@
     parseValue: function( value ) {
       var minusWasStripped = false;
       var result = value.replace(/[A-Za-z$]/g, '');
+
+      if(result.length === 0 && this.options.allowEmpty) {
+        return '';
+      }
+
       // strip minus and prepend later
       if( result.indexOf('-') !== -1 ) {
         result = result.replace( '-', '' );
@@ -147,7 +166,9 @@
     leadingZeroCheck: true,
     initialParse: true,
     parseOnBlur: true,
+    clearInputOnBlurForZeroValue: true,
     allowNegative: false,
+    allowEmpty: false,
     callback: function() {}
   };
 

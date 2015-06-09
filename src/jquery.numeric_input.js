@@ -34,6 +34,20 @@
         });
       }
 
+      if( _instance.options.clearInputOnBlurForZeroValue === true ) {
+        _instance.$elem.on('focus', function( e ) {
+          var result = _instance.$elem.val();
+
+          result = result.replace(/[A-Za-z$]/g, '');
+          result = result.replace( '-', '' );
+          result = result.replace( _instance.options.decimal, '.' );
+
+          if( parseFloat(result) === 0 ) {
+            _instance.$elem.val( '' );
+          }
+        });
+      }
+
       // trigger callback on change
       _instance.$elem.on('input propertychange', function(){
         var parsedValue = _instance.parseValue( _instance.$elem.val() );
@@ -145,6 +159,7 @@
     leadingZeroCheck: true,
     initialParse: true,
     parseOnBlur: true,
+    clearInputOnBlurForZeroValue: true,
     allowNegative: false,
     allowEmpty: false,
     callback: function() {}
