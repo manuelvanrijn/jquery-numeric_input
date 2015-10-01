@@ -119,17 +119,8 @@
         result = result.replace( '-', '' );
         minusWasStripped = true;
       }
-      if ( result.indexOf('.') !== -1 || result.indexOf(',') !== -1 ) {
-        result = result.replace( '.', this.options.decimal );
-        result = result.replace( ',', this.options.decimal );
-      }
-      if ( result.indexOf( this.options.decimal ) === 0 ) {
-        result = '0' + result;
-      }
-      if ( minusWasStripped === true && this.options.allowNegative === true) {
-        result = '-' + result;
-      }
       if ( this.options.numberOfDecimals !== null ) {
+        result = result.replace( ',', this.options.decimal );
         var decimals = result.split( this.options.decimal )[1];
         if( decimals !== undefined ) {
           if( decimals.length > this.options.numberOfDecimals ) {
@@ -141,6 +132,17 @@
         }
         result = String(Number(result).toFixed(this.options.numberOfDecimals));
       }
+      if ( result.indexOf('.') !== -1 || result.indexOf(',') !== -1 ) {
+        result = result.replace( '.', this.options.decimal );
+        result = result.replace( ',', this.options.decimal );
+      }
+      if ( result.indexOf( this.options.decimal ) === 0 ) {
+        result = '0' + result;
+      }
+      if ( minusWasStripped === true && this.options.allowNegative === true) {
+        result = '-' + result;
+      }
+      
       return result;
     }
   };
