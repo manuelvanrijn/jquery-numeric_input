@@ -16,7 +16,6 @@
 
       // bind the keypress event
       _instance.$elem.keypress(function( e ) {
-        console.log(e)
         if( _instance.preventDefaultForKeyCode(e.which) === true) {
           e.preventDefault();
         }
@@ -85,7 +84,7 @@
       }
     },
 
-    getNewValueForKeyCode: function( keyCode, currentValue, position=null ) {
+    getNewValueForKeyCode: function( keyCode, currentValue, position) {
       // if a comma or a dot is pressed...
       if( keyCode === 44 || keyCode === 46 || keyCode === 188 || keyCode === 190 ) {
         // and we do not have a options.decimal present...
@@ -93,10 +92,7 @@
           // append leading zero if currentValue is empty and leadingZeroCheck is active
           if( $.trim(currentValue) === '' && this.options.leadingZeroCheck ) {
             currentValue = '0';
-            position += 1
-          }
-          if(position === null) {
-            position = currentValue.length
+            position += 1;
           }
 
           // append the options.decimal instead of the dot or comma on the correct position
@@ -138,7 +134,7 @@
         var decimals = result.split( seperatorKey )[1];
         if( decimals !== undefined ) {
           if( decimals.length > this.options.numberOfDecimals ) {
-            result = Number(Number(String('0.' + decimals)).toFixed(this.options.numberOfDecimals)) + Math.floor(Number(result.replace(seperatorKey, '.')))
+            result = Number(Number(String('0.' + decimals)).toFixed(this.options.numberOfDecimals)) + Math.floor(Number(result.replace(seperatorKey, '.')));
           }
           if( decimals.length < this.options.numberOfDecimals ) {
             result += new Array( this.options.numberOfDecimals - decimals.length + 1 ).join('0');

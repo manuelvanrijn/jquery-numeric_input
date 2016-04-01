@@ -26,11 +26,15 @@ Here's a list with the available default options
 
 ```javascript
 {
-    decimal: ',',           // char to append when dot or comma is pressed
-    leadingZeroCheck: true, // append a 0 when the first input is a comma or dot
-    initialParse: true,     // parse the value on start to match the decimal option
-    parseOnBlur: true,      // parse value when user lose focus on field
-    allowNegative: false    // allow value to be negative (prepends a minus char)
+    decimal: ',',                       // char to append when dot or comma is pressed
+    numberOfDecimals: null,             // restrict the amount of numbers after the decimal char
+    leadingZeroCheck: true,             // append a 0 when the first input is a comma or dot
+    initialParse: true,                 // parse the value on start to match the decimal option
+    parseOnBlur: true,                  // parse value when user lose focus on field
+    clearInputOnBlurForZeroValue: true, // If value is 0, clear the input on focues
+    allowNegative: false,               // allow value to be negative (prepends a minus char)
+    allowEmpty: false,                  // If the input might also be empty ''
+    callback: function(elem, value) {}  //
 }
 ```
 

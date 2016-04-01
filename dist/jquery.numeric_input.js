@@ -1,5 +1,5 @@
 /*
- * jQuery Numeric Input - v0.1.7 - 2016-04-01
+ * jQuery Numeric Input - v0.2.0 - 2016-04-01
  * https://github.com/manuelvanrijn/jquery-numeric_input
  * Copyright (c) 2016 Manuel van Rijn
  * Licensed MIT, GPL
@@ -26,7 +26,7 @@
         if( _instance.preventDefaultForKeyCode(e.which) === true) {
           e.preventDefault();
         }
-        var newValue = _instance.getNewValueForKeyCode( e.which, _instance.$elem.val() );
+        var newValue = _instance.getNewValueForKeyCode( e.which, _instance.$elem.val(), this.selectionStart );
         if( newValue !== false) {
           _instance.$elem.val( newValue );
           _instance.options.callback.call(_instance, newValue);
@@ -91,7 +91,7 @@
       }
     },
 
-    getNewValueForKeyCode: function( keyCode, currentValue ) {
+    getNewValueForKeyCode: function( keyCode, currentValue, position) {
       // if a comma or a dot is pressed...
       if( keyCode === 44 || keyCode === 46 || keyCode === 188 || keyCode === 190 ) {
         // and we do not have a options.decimal present...
@@ -99,9 +99,11 @@
           // append leading zero if currentValue is empty and leadingZeroCheck is active
           if( $.trim(currentValue) === '' && this.options.leadingZeroCheck ) {
             currentValue = '0';
+            position += 1;
           }
-          // append the options.decimal instead of the dot or comma
-          return currentValue + this.options.decimal;
+
+          // append the options.decimal instead of the dot or comma on the correct position
+          return [currentValue.slice(0, position), this.options.decimal, currentValue.slice(position)].join('');
         }
       }
       // prepend the minus
@@ -114,6 +116,7 @@
     },
 
     parseValue: function( value ) {
+      var seperatorKey = '||SEP||';
       var minusWasStripped = false;
       var result = value.replace(/[A-Za-z$]/g, '');
 
@@ -121,34 +124,34 @@
         return '';
       }
 
+      result = result.replace( ',', seperatorKey ).replace( '.', seperatorKey );
+
       // strip minus and prepend later
       if( result.indexOf('-') !== -1 ) {
         result = result.replace( '-', '' );
         minusWasStripped = true;
       }
-      if ( result.indexOf('.') !== -1 || result.indexOf(',') !== -1 ) {
-        result = result.replace( '.', this.options.decimal );
-        result = result.replace( ',', this.options.decimal );
-      }
-      if ( result.indexOf( this.options.decimal ) === 0 ) {
+      if ( result.indexOf( seperatorKey ) === 0 ) {
         result = '0' + result;
       }
       if ( minusWasStripped === true && this.options.allowNegative === true) {
         result = '-' + result;
       }
       if ( this.options.numberOfDecimals !== null ) {
-        var decimals = result.split( this.options.decimal )[1];
+        var decimals = result.split( seperatorKey )[1];
         if( decimals !== undefined ) {
           if( decimals.length > this.options.numberOfDecimals ) {
-            result = Number(Number(String('0.' + decimals)).toFixed(this.options.numberOfDecimals)) + Math.floor(Number(result));
+            result = Number(Number(String('0.' + decimals)).toFixed(this.options.numberOfDecimals)) + Math.floor(Number(result.replace(seperatorKey, '.')));
           }
           if( decimals.length < this.options.numberOfDecimals ) {
             result += new Array( this.options.numberOfDecimals - decimals.length + 1 ).join('0');
           }
         }
-        result = String(Number(result.replace(this.options.decimal, '.')).toFixed(this.options.numberOfDecimals)).replace('.', this.options.decimal);
+        var num =  Number(String(result).replace(seperatorKey, '.')).toFixed(this.options.numberOfDecimals);
+        result = String(num).replace('.', seperatorKey);
       }
-      return result;
+
+      return result.split( seperatorKey ).join( this.options.decimal );
     }
   };
 

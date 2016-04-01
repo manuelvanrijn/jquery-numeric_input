@@ -105,8 +105,8 @@
   });
 
   test('append leading zero', function() {
-    equal(this.numeric_input.getNewValueForKeyCode(44, ''), '0,', 'should prepand a leading zero by default for comma');
-    equal(this.numeric_input.getNewValueForKeyCode(46, ''), '0,', 'should prepand a leading zero by default for dot');
+    equal(this.numeric_input.getNewValueForKeyCode(44, '', 1), '0,', 'should prepand a leading zero by default for comma');
+    equal(this.numeric_input.getNewValueForKeyCode(46, '', 1), '0,', 'should prepand a leading zero by default for dot');
 
     this.target.numeric_input({
       leadingZeroCheck: false
@@ -117,15 +117,15 @@
   });
 
   test('different decimal char', function() {
-    equal(this.numeric_input.getNewValueForKeyCode(44, '987'), '987,', 'should append a comma by default for a comma');
-    equal(this.numeric_input.getNewValueForKeyCode(46, '987'), '987,', 'should append a comma by default for a dot');
+    equal(this.numeric_input.getNewValueForKeyCode(44, '987', 3), '987,', 'should append a comma by default for a comma');
+    equal(this.numeric_input.getNewValueForKeyCode(46, '987', 3), '987,', 'should append a comma by default for a dot');
 
     this.target.numeric_input({
       decimal: '#'
     });
 
-    equal(this.target.data('numeric_input').getNewValueForKeyCode(44, '987'), '987#', 'should append a # when specified for a comma');
-    equal(this.target.data('numeric_input').getNewValueForKeyCode(46, '987'), '987#', 'should append a # when specified for a dot');
+    equal(this.target.data('numeric_input').getNewValueForKeyCode(44, '987', 3), '987#', 'should append a # when specified for a comma');
+    equal(this.target.data('numeric_input').getNewValueForKeyCode(46, '987', 3), '987#', 'should append a # when specified for a dot');
   });
 
   test('allow only one instance of decimal in the value', function() {
@@ -333,8 +333,8 @@
   });
 
   test('Should place the decimal at the correct position', function() {
-    equal(this.numeric_input.getNewValueForKeyCode(44, ''), '0,');
-    equal(this.numeric_input.getNewValueForKeyCode(44, '2'), '2,');
+    equal(this.numeric_input.getNewValueForKeyCode(44, '', 0), '0,');
+    equal(this.numeric_input.getNewValueForKeyCode(44, '2', 1), '2,');
     equal(this.numeric_input.getNewValueForKeyCode(44, '22', 0), ',22');
     equal(this.numeric_input.getNewValueForKeyCode(44, '22', 1), '2,2');
     equal(this.numeric_input.getNewValueForKeyCode(44, '22', 10), '22,');
