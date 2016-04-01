@@ -340,4 +340,26 @@
     equal(this.numeric_input.getNewValueForKeyCode(44, '22', 10), '22,');
   });
 
+  module('Number of decimals', {
+    setup: function() {
+      $('#qunit-fixture')
+        .append('<input type="text" id="numeric" />');
+      this.target = $('#qunit-fixture #numeric');
+      this.numeric_input = this.target.numeric_input({
+        decimal: '#',
+        numberOfDecimals: 2,
+        leadingZeroCheck: true
+      }).data('numeric_input');
+    },
+    teardown: function() {
+      $('#qunit-fixture').empty();
+      this.target = undefined;
+      this.numeric_input = undefined;
+    }
+  });
+
+  test('Weird past inputs', function() {
+    equal(this.numeric_input.parseValue('€ 46,34 '), '46#34');
+  })
+
 }(jQuery));
