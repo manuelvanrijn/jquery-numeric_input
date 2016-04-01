@@ -139,7 +139,7 @@
             result += new Array( this.options.numberOfDecimals - decimals.length + 1 ).join('0');
           }
         }
-        result = String(Number(result).toFixed(this.options.numberOfDecimals));
+        result = String(Number(result.replace(this.options.decimal, '.')).toFixed(2)).replace('.', this.options.decimal);
       }
       return result;
     }

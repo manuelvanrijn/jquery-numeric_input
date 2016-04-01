@@ -1,7 +1,7 @@
 /*
- * jQuery Numeric Input - v0.1.6 - 2015-06-09
+ * jQuery Numeric Input - v0.1.7 - 2016-04-01
  * https://github.com/manuelvanrijn/jquery-numeric_input
- * Copyright (c) 2015 Manuel van Rijn
+ * Copyright (c) 2016 Manuel van Rijn
  * Licensed MIT, GPL
  */
 
@@ -146,7 +146,7 @@
             result += new Array( this.options.numberOfDecimals - decimals.length + 1 ).join('0');
           }
         }
-        result = String(Number(result).toFixed(this.options.numberOfDecimals));
+        result = String(Number(result.replace(this.options.decimal, '.')).toFixed(2)).replace('.', this.options.decimal);
       }
       return result;
     }
