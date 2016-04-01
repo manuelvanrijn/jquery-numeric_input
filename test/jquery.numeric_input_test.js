@@ -360,6 +360,6 @@
 
   test('Weird past inputs', function() {
     equal(this.numeric_input.parseValue('€ 46,34 '), '46#34');
-  })
+  });
 
 }(jQuery));

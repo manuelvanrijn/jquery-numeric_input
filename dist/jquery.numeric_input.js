@@ -1,5 +1,5 @@
 /*
- * jQuery Numeric Input - v0.2.0 - 2016-04-01
+ * jQuery Numeric Input - v0.2.1 - 2016-04-01
  * https://github.com/manuelvanrijn/jquery-numeric_input
  * Copyright (c) 2016 Manuel van Rijn
  * Licensed MIT, GPL
@@ -118,7 +118,7 @@
     parseValue: function( value ) {
       var seperatorKey = '||SEP||';
       var minusWasStripped = false;
-      var result = value.replace(/[A-Za-z$]/g, '');
+      var result = value.replace(/[^\d.,\-]/g, '');
 
       if(result.length === 0 && this.options.allowEmpty) {
         return '';

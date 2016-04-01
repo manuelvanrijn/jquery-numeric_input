@@ -111,7 +111,7 @@
     parseValue: function( value ) {
       var seperatorKey = '||SEP||';
       var minusWasStripped = false;
-      var result = value.replace(/[^\d.,-]/g, '');
+      var result = value.replace(/[^\d.,\-]/g, '');
 
       if(result.length === 0 && this.options.allowEmpty) {
         return '';
