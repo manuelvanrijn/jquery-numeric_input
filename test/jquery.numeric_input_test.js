@@ -286,4 +286,58 @@
     equal(this.second_target.val(), '-1,0', 'should parse the value to 1,0');
   });
 
+  module('Allow empty values', {
+    setup: function() {
+      $('#qunit-fixture')
+        .append('<input type="text" id="numeric" />');
+      this.target = $('#qunit-fixture #numeric');
+      this.numeric_input = this.target.numeric_input({
+        allowEmpty: true
+      }).data('numeric_input');
+    },
+    teardown: function() {
+      $('#qunit-fixture').empty();
+      this.target = undefined;
+      this.numeric_input = undefined;
+    }
+  });
+
+  test('should prepend the minus char if allowed', function() {
+    equal(this.numeric_input.parseValue(''), '');
+    equal(this.numeric_input.parseValue(''), '');
+  });
+
+  module('Number of decimals', {
+    setup: function() {
+      $('#qunit-fixture')
+        .append('<input type="text" id="numeric" />');
+      this.target = $('#qunit-fixture #numeric');
+      this.numeric_input = this.target.numeric_input({
+        numberOfDecimals: 3,
+        leadingZeroCheck: true
+      }).data('numeric_input');
+    },
+    teardown: function() {
+      $('#qunit-fixture').empty();
+      this.target = undefined;
+      this.numeric_input = undefined;
+    }
+  });
+
+  test('Numbers of decimals to return', function() {
+    equal(this.numeric_input.parseValue('10'), '10,000');
+    equal(this.numeric_input.parseValue('10.1'), '10,100');
+    equal(this.numeric_input.parseValue('10.12'), '10,120');
+    equal(this.numeric_input.parseValue('10.123'), '10,123');
+    equal(this.numeric_input.parseValue('10.1235'), '10,123');
+  });
+
+  test('Should place the decimal at the correct position', function() {
+    equal(this.numeric_input.getNewValueForKeyCode(44, ''), '0,');
+    equal(this.numeric_input.getNewValueForKeyCode(44, '2'), '2,');
+    equal(this.numeric_input.getNewValueForKeyCode(44, '22', 0), ',22');
+    equal(this.numeric_input.getNewValueForKeyCode(44, '22', 1), '2,2');
+    equal(this.numeric_input.getNewValueForKeyCode(44, '22', 10), '22,');
+  });
+
 }(jQuery));
