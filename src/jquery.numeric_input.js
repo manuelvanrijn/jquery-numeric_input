@@ -12,6 +12,7 @@
       // set instance variable
       var _instance = this;
 
+      _instance.ctrlDown = false;
       _instance.options = $.extend({}, $.fn.numeric_input.defaults, _instance.options);
 
       // bind the keypress event
@@ -60,10 +61,31 @@
         _instance.$elem.val( parsedValue );
       }
 
+      // event for checking ctrl/cmd
+      var ctrlKey = 17;
+      var cmdKey  = 91;
+      $(document).keydown(function(e) {
+        // ctrl or command key
+        if (e.keyCode === ctrlKey || e.keyCode === cmdKey) { _instance.ctrlDown = true; }
+      }).keyup(function(e) {
+        if (e.keyCode === ctrlKey || e.keyCode === cmdKey) { _instance.ctrlDown = false; }
+      });
+
       return _instance;
     },
 
     preventDefaultForKeyCode: function( keyCode ) {
+      // copy past
+      var keySelectAll = 97,
+          keyCut = 120,
+          keyCopy = 99,
+          keyPaste = 118;
+      if( this.ctrlDown && keyCode === keySelectAll ||
+          this.ctrlDown && keyCode === keyCut ||
+          this.ctrlDown && keyCode === keyCopy ||
+          this.ctrlDown && keyCode === keyPaste ) {
+        return false;
+      }
       // numeric
       if( keyCode >= 48 && keyCode <= 57) {
         return false;
